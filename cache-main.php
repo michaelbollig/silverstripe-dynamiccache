@@ -27,6 +27,12 @@ if(isset($_GET['flush'])) {
 require_once('../framework/core/Core.php');
 require_once('code/DynamicCache.php');
 
+// If in dev mode, bypass caching completely
+if(SS_ENVIRONMENT_TYPE === 'dev') {
+	require('../framework/main.php');
+	exit;
+}
+
 // IIS will sometimes generate this.
 if(!empty($_SERVER['HTTP_X_ORIGINAL_URL'])) {
 	$_SERVER['REQUEST_URI'] = $_SERVER['HTTP_X_ORIGINAL_URL'];
